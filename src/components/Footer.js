@@ -1,49 +1,98 @@
-import React from 'react';  
-import { motion } from 'framer-motion';  
-import { Mail, Phone, MapPin, Instagram, Twitter, Facebook } from 'lucide-react';  
+import React from "react";
+import { motion } from "framer-motion";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
-const Footer = () => {  
-  return (  
-    <motion.footer  
-      initial={{ opacity: 0, y: 20 }}  
-      whileInView={{ opacity: 1, y: 0 }}  
-      className="bg-gradient-to-r from-blue-900 to-yellow-500 text-white py-12 mt-12"  
-    >  
-      <div className="container mx-auto px-4">  
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">  
-          <div className="col-span-1 md:col-span-2">  
-            <h3 className="text-2xl font-bold mb-4 bg-white/20 px-2 rounded">RopaVibes</h3>  
-            <p className="text-blue-100 mb-4">Tu tienda de ropa urbana con estilo Vans, pero en azul y amarillo. ¡Compra con confianza!</p>  
-            <div className="flex space-x-4">  
-              <a href="#" className="p-2 hover:bg-white/20 rounded-full"><Instagram className="w-5 h-5" /></a>  
-              <a href="#" className="p-2 hover:bg-white/20 rounded-full"><Twitter className="w-5 h-5" /></a>  
-              <a href="#" className="p-2 hover:bg-white/20 rounded-full"><Facebook className="w-5 h-5" /></a>  
-            </div>  
-          </div>  
-          <div>  
-            <h4 className="font-bold mb-4">Enlaces Rápidos</h4>  
-            <ul className="space-y-2 text-sm">  
-              <li><a href="/" className="hover:underline">Inicio</a></li>  
-              <li><a href="/products" className="hover:underline">Productos</a></li>  
-              <li><a href="/cart" className="hover:underline">Carrito</a></li>  
-              <li><a href="/login" className="hover:underline">Cuenta</a></li>  
-            </ul>  
-          </div>  
-          <div>  
-            <h4 className="font-bold mb-4">Contacto</h4>  
-            <div className="space-y-2 text-sm">  
-              <p className="flex items-center gap-2"><Mail className="w-4 h-4" /> info@ropavibes.com</p>  
-              <p className="flex items-center gap-2"><Phone className="w-4 h-4" /> +1 234 567 890</p>  
-              <p className="flex items-center gap-2"><MapPin className="w-4 h-4" /> Calle Falsa 123</p>  
-            </div>  
-          </div>  
-        </div>  
-        <div className="border-t border-white/20 pt-6 text-center text-sm text-blue-100">  
-          <p>&copy; 2024 RopaVibes. Todos los derechos reservados. | Política de Privacidad | Términos de Servicio</p>  
-        </div>  
-      </div>  
-    </motion.footer>  
-  );  
-};  
+// Paleta: base neutral + acentos del logo
+const COLORS = {
+  midnight: "#141416", // grafito (antes #0d112d)
+  navy: "#2b3036",     // pizarra (antes #002155)
+  gold: "#d2983a",     // dorado (se mantiene)
+  sand: "#EDE5DA",     // arena (se mantiene)
+};
+
+const Footer = () => {
+  const footerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, when: "beforeChildren", staggerChildren: 0.15 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
+  };
+
+  const Social = ({ href, label, children }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border text-[#EDE5DA]/80 border-white/10 hover:text-[#d2983a] hover:border-[#d2983a]/60 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-[#d2983a]/60"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.94 }}
+    >
+      {children}
+    </a>
+  );
+
+  return (
+    <footer
+      className="border-t text-[#EDE5DA]"
+      style={{
+        borderTopColor: "rgba(210,152,58,0.35)", // dorado
+        backgroundImage: `linear-gradient(to bottom, ${COLORS.midnight}, ${COLORS.navy})`, // grafito → pizarra
+      }}
+      variants={footerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <div className="container mx-auto px-4 py-12 text-center">
+        {/* Marca + descripción */}
+        <div variants={itemVariants} className="mb-8 flex flex-col items-center">
+          <img
+            src={`${process.env.PUBLIC_URL}/img/logos/png/PNGlogoNaranja_textNaranja.png`}
+            alt="Globalis Logo"
+            className="logoFooter mb-4 select-none"
+          />
+          <h3 className="sr-only">Globalis</h3>
+          <p className="text-[#EDE5DA]/80 max-w-2xl leading-relaxed">
+            Tu pasaporte a las aventuras más increíbles. En Globalis convertimos tus sueños de viaje en realidad, con experiencias únicas y memorables alrededor del mundo.
+          </p>
+        </div>
+
+        {/* Iconos sociales */}
+        <div variants={itemVariants} className="flex justify-center gap-4 mb-8">
+          <Social href="https://facebook.com" label="Facebook">
+            <FaFacebookF size={18} />
+          </Social>
+          <Social href="https://twitter.com" label="Twitter">
+            <FaTwitter size={18} />
+          </Social>
+          <Social href="https://instagram.com" label="Instagram">
+            <FaInstagram size={18} />
+          </Social>
+          <Social href="https://linkedin.com" label="LinkedIn">
+            <FaLinkedinIn size={18} />
+          </Social>
+        </div>
+
+        {/* Divider dorado */}
+        <div variants={itemVariants} className="flex justify-center mb-4">
+          <span className="h-[2px] w-24 bg-[#d2983a] rounded-full opacity-80" />
+        </div>
+
+        {/* Copyright */}
+        <p variants={itemVariants} className="text-sm text-[#EDE5DA]/70">
+          &copy; {new Date().getFullYear()} Globalis. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
+  );
+};
 
 export default Footer;
