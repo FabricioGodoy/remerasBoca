@@ -24,7 +24,7 @@ export default function App() {
               { value: "24h", label: "respuesta" },
             ]}
           />
-        <AboutSection />
+        {/* <AboutSection /> */}
         <PackagesSection />
         {/* <ContactSection /> */}
       </main>
