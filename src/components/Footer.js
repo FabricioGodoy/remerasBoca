@@ -4,10 +4,10 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/f
 
 // Paleta: base neutral + acentos del logo
 const COLORS = {
-  midnight: "#141416", // grafito (antes #0d112d)
-  navy: "#2b3036",     // pizarra (antes #002155)
-  gold: "#d2983a",     // dorado (se mantiene)
-  sand: "#EDE5DA",     // arena (se mantiene)
+  midnight: "#141416",
+  navy: "#2b3036",
+  gold: "#d2983a",
+  sand: "#EDE5DA",
 };
 
 const Footer = () => {
@@ -44,7 +44,7 @@ const Footer = () => {
       className="border-t text-[#EDE5DA]"
       style={{
         borderTopColor: "rgba(210,152,58,0.35)", // dorado
-        backgroundImage: `linear-gradient(to bottom, ${COLORS.midnight}, ${COLORS.navy})`, // grafito → pizarra
+        backgroundImage: `linear-gradient(to bottom, ${COLORS.midnight}, ${COLORS.navy})`,
       }}
       variants={footerVariants}
       initial="hidden"
@@ -52,16 +52,20 @@ const Footer = () => {
       viewport={{ once: true, amount: 0.3 }}
     >
       <div className="container mx-auto px-4 py-12 text-center">
-        {/* Marca + descripción */}
+        {/* Logo + descripción */}
         <div variants={itemVariants} className="mb-8 flex flex-col items-center">
           <img
-            src={`${process.env.PUBLIC_URL}/img/logos/png/PNGlogoNaranja_textNaranja.png`}
-            alt="Globalis Logo"
+            src={`${process.env.PUBLIC_URL}/img/logos/svg/puente_amarillo.svg`}
+            alt="Logo Xeneize"
             className="logoFooter mb-4 select-none"
           />
-          <h3 className="sr-only">Globalis</h3>
+          <h3 className="sr-only">Vagos Xeneizes</h3>
+
           <p className="text-[#EDE5DA]/80 max-w-2xl leading-relaxed">
-            Tu pasaporte a las aventuras más increíbles. En Globalis convertimos tus sueños de viaje en realidad, con experiencias únicas y memorables alrededor del mundo.
+            Somos dos hinchas que crecimos soñando con estos colores. Diseñamos cada prenda con
+            el amor, la pasión y el orgullo que nos despierta Boca. No somos una marca gigante:
+            somos corazón, esfuerzo y sentimiento azul y oro. Gracias por bancar este proyecto
+            hecho por y para xeneizes.
           </p>
         </div>
 
@@ -88,7 +92,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p variants={itemVariants} className="text-sm text-[#EDE5DA]/70">
-          &copy; {new Date().getFullYear()} Globalis. Todos los derechos reservados.
+          &copy; {new Date().getFullYear()} Vagos Xeneizes. Hecho con pasión azul y oro. Todos los derechos reservados.
         </p>
       </div>
     </footer>

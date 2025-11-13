@@ -18,8 +18,8 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Nosotros", href: "#about" },
-    { name: "Paquetes", href: "#packages" },
-    /*  { name: "Contacto", href: "#contact" }, */
+    { name: "Remeras", href: "#packages" },
+/*      { name: "Contacto", href: "#contact" }, */
   ];
 
   const toggleMenu = () => setIsOpen((v) => !v);
@@ -41,12 +41,12 @@ const Navbar = () => {
       transition={{ duration: 0.3 }}
       className={[
         "fixed top-0 left-0 right-0 z-50",
-        // Gradiente neutro (grafito → pizarra) y sutil borde inferior rojo
-        "bg-gradient-to-b from-[#2b3036] to-[#141416]/95",
+        // Gradiente neutro (grafito → pizarra) y sutil borde inferior amarillo
+        "bg-gradient-to-b from-[#ffffff] to-[#b6b6b6]/95",
         "backdrop-blur-xl",
         "shadow-lg",
         "border-b",
-        "[border-bottom-color:#d2983a]", // rojo
+        "[border-bottom-color:#d2983a]", // amarillo
       ].join(" ")}
       style={{ color: COLORS.sand }}
     >
@@ -71,8 +71,8 @@ const Navbar = () => {
                 onClick={(e) => handleScroll(e, item.href.substring(1))}
                 className={[
                   "relative group font-medium transition-colors duration-300",
-                  "text-[#EDEDED]/90 hover:text-[#d2983a]",
-                  isActive ? "text-[#C1121F]" : "",
+                  "text-[#070942]/90 hover:text-[#d2983a]",
+                  isActive ? "text-[#0c158d]" : "",
                 ].join(" ")}
               >
                 {item.name}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin } from 'lucide-react';
-const phone = '5492612131392'; // sin +, correcto para AR
-const defaultMsg = 'Hola! Quiero averiguar por los paquetes de viaje. ¿Me pasan info?';
+const phone = '+5491133779222'; // sin +, correcto para AR
+const defaultMsg = 'AWANTE BOKITA, QUIERO COMPRAR UNA REMERA'; // mensaje por defecto
 
  
 const ContactSection = () => {
