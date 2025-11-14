@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Globe, Users, Heart } from "lucide-react";
+import { Palette, Heart, Sparkles } from "lucide-react";
 
 const COLORS = {
   midnight: "#141416",
@@ -11,113 +11,136 @@ const COLORS = {
 
 const AboutSection = () => {
   const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, when: "beforeChildren", staggerChildren: 0.2 },
+      transition: { duration: 0.6, staggerChildren: 0.15 },
     },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } 
+    },
   };
 
-  const FeatureCard = ({ Icon, title, desc, delay = 0 }) => (
-    <div
+  const FeatureCard = ({ Icon, title, desc }) => (
+    <motion.div
       variants={itemVariants}
-      transition={{ delay }}
-      className="relative rounded-2xl p-8 bg-gradient-to-b from-[#2b3036]/95 to-[#141416]/95 text-[#EDE5DA] border border-white/10 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+      className="group relative rounded-2xl p-6 bg-white/80 backdrop-blur-sm text-[#141416] border border-[#d2983a]/20 shadow-lg hover:shadow-2xl hover:border-[#d2983a]/40 hover:-translate-y-2 transition-all duration-300"
     >
-      <span className="absolute inset-x-2 -top-px h-[2px] bg-[#d2983a] rounded-t-2xl" />
-      <div className="w-16 h-16 mb-6 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-        <Icon className="w-8 h-8" color={COLORS.gold} />
+      <div className="absolute inset-x-0 -top-px h-[2px] bg-gradient-to-r from-transparent via-[#d2983a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      
+      <div className="w-14 h-14 mb-5 rounded-xl bg-gradient-to-br from-[#d2983a]/20 to-[#d2983a]/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        <Icon className="w-7 h-7" color={COLORS.gold} strokeWidth={2} />
       </div>
-      <h3 className="text-2xl font-bold mb-3 text-[#EDE5DA]">{title}</h3>
-      <p className="text-[#EDE5DA]/80 leading-relaxed">{desc}</p>
-    </div>
+      
+      <h3 className="text-xl font-bold mb-2 text-[#141416] group-hover:text-[#d2983a] transition-colors duration-300">
+        {title}
+      </h3>
+      <p className="text-[#141416]/70 leading-relaxed text-sm">
+        {desc}
+      </p>
+    </motion.div>
   );
 
   return (
-    <section
+    <motion.section
       id="about"
-      className="relative py-20 overflow-hidden bg-gradient-to-br from-[#EDE5DA] via-white to-[#2b3036]/5"
+      className="relative py-24 overflow-hidden bg-gradient-to-b from-white via-[#EDE5DA]/30 to-white"
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#d2983a]/40" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-[#d2983a]/30" />
+      {/* Decorative elements */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(210,152,58,0.08),transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(210,152,58,0.06),transparent_50%)]" />
 
-      <div className="container mx-auto px-4 max-w-5xl">
-        <h2
-          variants={itemVariants}
-          className="text-4xl md:text-5xl font-extrabold text-center text-[#141416] mb-6"
-        >
-          Sobre{" "}
-          <span className="inline-flex items-center gap-2 px-3 py-1 text-[#d2983a]">
-            Nosotros
-          </span>
-        </h2>
+      <div className="container mx-auto px-4 max-w-6xl relative">
+        {/* Header */}
+        <motion.div variants={itemVariants} className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#d2983a]/10 border border-[#d2983a]/20 mb-6">
+            <Sparkles className="w-4 h-4" color={COLORS.gold} />
+            <span className="text-sm font-semibold text-[#d2983a]">Nuestra Historia</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#141416] mb-6">
+            Hecho por <span className="bg-gradient-to-r from-[#d2983a] to-[#f0a840] bg-clip-text text-transparent">hinchas</span>,<br />
+            para hinchas
+          </h2>
+          
+          <div className="flex justify-center mb-8">
+            <span className="h-1 w-20 bg-gradient-to-r from-transparent via-[#d2983a] to-transparent rounded-full" />
+          </div>
+        </motion.div>
 
-        <div variants={itemVariants} className="flex justify-center mb-10">
-          <span className="h-[2px] w-24 bg-[#d2983a] rounded-full" />
-        </div>
+        {/* Content */}
+        <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-16">
+          <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-[#d2983a]/10 shadow-xl">
+            <p className="text-[#141416]/80 text-lg md:text-xl leading-relaxed mb-6">
+              No tenemos décadas de historia. <span className="font-semibold text-[#d2983a]">Tenemos algo mejor</span>: 
+              ganas, pasión genuina y el sueño de dos hinchas de Boca que dijeron "hagámoslo".
+            </p>
+            
+            <p className="text-[#141416]/80 text-lg md:text-xl leading-relaxed mb-6">
+              Cada remera que hacemos lleva horas de diseño, ajustes hasta que quede perfecta, 
+              y ese <span className="font-semibold text-[#141416]">amor bostero</span> que solo entiende 
+              quien vivió La Bombonera desde adentro.
+            </p>
+            
+            <p className="text-[#141416]/80 text-lg md:text-xl leading-relaxed mb-6">
+              No somos una marca gigante ni pretendemos serlo. Somos auténticos, 
+              trabajamos de verdad en cada detalle, y estamos orgullosos de empezar desde abajo, 
+              <span className="font-semibold text-[#d2983a]"> como Boca nos enseñó</span>.
+            </p>
+            
+            <div className="pt-6 border-t border-[#d2983a]/20">
+              <p className="text-[#141416] text-xl md:text-2xl font-bold text-center">
+                Si sos hincha de verdad, esto es para vos. 💙💛
+              </p>
+            </div>
+          </div>
+        </motion.div>
 
-        <p
-          variants={itemVariants}
-          className="mx-auto max-w-[72ch] text-[#141416]/80 text-lg md:text-xl leading-7 md:leading-8 mb-14 text-center px-4 md:px-0"
-        >
-          <span>
-            Somos dos hinchas de Boca que un día se miraron y dijeron: “¿Por qué
-            no hacemos algo nuestro, algo bien bostero, hecho con amor y con el
-            corazón puesto en estos colores?”.
-          </span>
-          <br /><br />
-          <span>
-            Cada diseño, cada remera, cada detalle está pensado con la pasión de
-            quienes crecimos gritando goles, secándonos las lágrimas con la camiseta
-            y viviendo la vida al ritmo de La Bombonera. No somos una gran marca:
-            somos hinchas. Y eso se nota.
-          </span>
-          <br /><br />
-          <span>
-            Acá no vas a encontrar producción masiva. Acá hay dedicación,
-            esfuerzo, noches de laburo y ganas de que cada prenda te haga sentir
-            lo mismo que sentimos nosotros cuando vemos esos colores mezclarse:
-            orgullo, piel de gallina y amor eterno.
-          </span>
-          <br /><br />
-          <span>
-            Esto es para vos, que llevás a Boca todos los días. Esto es para
-            nosotros, que hacemos todo con el alma. Y esto recién empieza.
-          </span>
-        </p>
-
+        {/* Feature Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           <FeatureCard
-            Icon={Globe}
-            title="Para hinchas de todo el país"
-            desc="No importa dónde estés: si sos bostero, sos de la familia. Enviamos a todas las provincias."
-            delay={0.1}
-          />
-          <FeatureCard
-            Icon={Users}
-            title="Hecho por hinchas"
-            desc="No somos una marca fría. Somos dos xeneizes que diseñan con amor, criterio propio y mucho sentimiento."
-            delay={0.2}
+            Icon={Palette}
+            title="Diseños únicos"
+            desc="Cada estampa es exclusiva, pensada con criterio bostero y diseñada con amor al detalle. Nada de copiar y pegar."
           />
           <FeatureCard
             Icon={Heart}
-            title="Pasión en cada detalle"
-            desc="Cada remera se piensa, se ajusta y se revisa como si fuera para nosotros mismos. Porque lo es."
-            delay={0.3}
+            title="Calidad real"
+            desc="Usamos telas premium y técnicas de estampado duraderas. No vendemos promesas: vendemos remeras que van a durar."
+          />
+          <FeatureCard
+            Icon={Sparkles}
+            title="Fresh & auténtico"
+            desc="Somos nuevos, sí. Pero eso nos hace más genuinos, más cercanos y con más hambre de hacer las cosas bien."
           />
         </div>
+
+        {/* CTA */}
+        <motion.div variants={itemVariants} className="text-center mt-16">
+          <p className="text-[#141416]/60 text-sm md:text-base mb-6">
+            Seguimos creciendo, diseño a diseño, hincha a hincha. ¿Te sumás?
+          </p>
+          <a
+            href="#remeras"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-[#d2983a] hover:bg-[#f0a840] text-[#141416] font-bold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
+          >
+            Ver Remeras
+            <span className="text-xl">→</span>
+          </a>
+        </motion.div>
       </div>
 
+      {/* WhatsApp Button */}
       <a
         href="https://wa.me/+5491133779222"
         className="btn-flotante"
@@ -126,7 +149,7 @@ const AboutSection = () => {
       >
         <img src="https://img.icons8.com/office/40/whatsapp--v1.png" alt="wpp" />
       </a>
-    </section>
+    </motion.section>
   );
 };
 
